@@ -1,0 +1,66 @@
+<div id="pedidos360-views">
+  <style>
+    #pedidos360-views { color-scheme: light dark; --page: light-dark(#f4f7f5,#111915); --panel: light-dark(#ffffff,#1a241f); --soft: light-dark(#edf3ef,#26332c); --ink: light-dark(#203129,#edf3ef); --muted: light-dark(#687970,#aab7ae); --line: light-dark(#dce6df,#34433a); --brand: light-dark(#176647,#68c697); --brand-ink: light-dark(#ffffff,#10271b); --good: light-dark(#26734d,#86d5a6); --warn: light-dark(#9b6715,#f2c46e); display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; color: var(--ink); font: 400 13px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    #pedidos360-views * { box-sizing: border-box; }
+    #pedidos360-views .app { min-width: 0; overflow: hidden; background: var(--page); border: 1px solid var(--line); border-radius: 12px; }
+    #pedidos360-views .top { height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 14px; background: var(--panel); border-bottom: 1px solid var(--line); }
+    #pedidos360-views .logo { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--brand); color: var(--brand-ink); font-weight: 500; }
+    #pedidos360-views .wordmark { font-weight: 500; }
+    #pedidos360-views .user { margin-left: auto; color: var(--muted); }
+    #pedidos360-views .avatar { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-left: 8px; border-radius: 50%; background: var(--soft); color: var(--ink); font-weight: 500; }
+    #pedidos360-views .layout { display: grid; grid-template-columns: 112px minmax(0,1fr); min-height: 438px; }
+    #pedidos360-views .side { padding: 14px 8px; background: var(--panel); border-right: 1px solid var(--line); }
+    #pedidos360-views .nav { display: block; margin-bottom: 4px; padding: 8px; border-radius: 7px; color: var(--muted); white-space: nowrap; }
+    #pedidos360-views .nav.on { background: var(--soft); color: var(--brand); font-weight: 500; }
+    #pedidos360-views .content { min-width: 0; padding: 18px 14px; }
+    #pedidos360-views .title { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+    #pedidos360-views h2 { margin: 0; font-size: 17px; font-weight: 500; }
+    #pedidos360-views .push { margin-left: auto; }
+    #pedidos360-views .button { padding: 7px 10px; border: 0; border-radius: 7px; background: var(--brand); color: var(--brand-ink); white-space: nowrap; font: inherit; font-weight: 500; }
+    #pedidos360-views .stats { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; margin-bottom: 16px; }
+    #pedidos360-views .stat { min-width: 0; padding: 9px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+    #pedidos360-views .stat span { display: block; color: var(--muted); font-size: 11px; }
+    #pedidos360-views .stat strong { display: block; margin-top: 4px; font-size: 16px; font-weight: 500; }
+    #pedidos360-views .subhead { display: flex; align-items: center; margin: 14px 0 8px; font-weight: 500; }
+    #pedidos360-views .table { overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+    #pedidos360-views .row { display: grid; grid-template-columns: .7fr 1fr 1.2fr; align-items: center; gap: 5px; padding: 9px 7px; border-bottom: 1px solid var(--line); font-size: 11px; }
+    #pedidos360-views .row:last-child { border-bottom: 0; }
+    #pedidos360-views .row.head { color: var(--muted); }
+    #pedidos360-views .pill { display: inline-block; width: fit-content; padding: 3px 6px; border-radius: 99px; background: color-mix(in srgb,var(--good) 15%,transparent); color: var(--good); white-space: nowrap; }
+    #pedidos360-views .pill.wait { background: color-mix(in srgb,var(--warn) 17%,transparent); color: var(--warn); }
+    #pedidos360-views .topic { margin-bottom: 8px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+    #pedidos360-views .topichead { display: flex; align-items: center; gap: 8px; font-weight: 500; }
+    #pedidos360-views .topicmeta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 7px; color: var(--muted); font-size: 11px; }
+    #pedidos360-views .group { display: flex; align-items: center; gap: 8px; padding: 10px; border-radius: 8px; background: var(--soft); }
+    #pedidos360-views .group strong { font-weight: 500; }
+    @media (max-width: 850px) { #pedidos360-views { grid-template-columns: 1fr; } }
+  </style>
+  <section class="app" aria-label="Pantalla de pedidos">
+    <header class="top"><span class="logo">P</span><span class="wordmark">Pedidos 360</span><span class="user">Operaciones <span class="avatar">CM</span></span></header>
+    <div class="layout">
+      <nav class="side" aria-label="Navegación de pedidos"><span class="nav">Resumen</span><span class="nav on">Pedidos</span><span class="nav">Clientes</span><span class="nav">Eventos</span><span class="nav">Configuración</span></nav>
+      <main class="content">
+        <div class="title"><h2>Pedidos</h2><button class="button push">＋ Nuevo pedido</button></div>
+        <div class="stats"><div class="stat"><span>Pedidos hoy</span><strong>28</strong></div><div class="stat"><span>Pendientes</span><strong>8</strong></div><div class="stat"><span>Ventas del día</span><strong>$1,28 M</strong></div></div>
+        <div class="subhead">Últimos pedidos</div>
+        <div class="table"><div class="row head"><span>Pedido</span><span>Cliente</span><span>Estado</span></div><div class="row"><span>#1048</span><span>Camila M.</span><span class="pill">Preparado</span></div><div class="row"><span>#1047</span><span>Javier R.</span><span class="pill wait">En preparación</span></div><div class="row"><span>#1046</span><span>Antonia P.</span><span class="pill">Entregado</span></div><div class="row"><span>#1045</span><span>Diego S.</span><span class="pill wait">Pendiente</span></div></div>
+      </main>
+    </div>
+  </section>
+  <section class="app" aria-label="Administración de Kafka">
+    <header class="top"><span class="logo">P</span><span class="wordmark">Pedidos 360</span><span class="user">Plataforma <span class="avatar">AD</span></span></header>
+    <div class="layout">
+      <nav class="side" aria-label="Navegación de plataforma"><span class="nav">Resumen</span><span class="nav">Pedidos</span><span class="nav on">Kafka</span><span class="nav">RabbitMQ</span><span class="nav">Configuración</span></nav>
+      <main class="content">
+        <div class="title"><h2>Tópicos Kafka</h2><button class="button push">＋ Crear tópico</button></div>
+        <div class="topic"><div class="topichead">pedidos.creados <span class="pill push">Activo</span></div><div class="topicmeta"><span>1 partición</span><span>1 réplica</span><span>Retención 1 día</span></div></div>
+        <div class="topic"><div class="topichead">pedidos.estado <span class="pill push">Activo</span></div><div class="topicmeta"><span>1 partición</span><span>1 réplica</span><span>Retención 7 días</span></div></div>
+        <div class="topic"><div class="topichead">pedidos.dlq <span class="pill push">Activo</span></div><div class="topicmeta"><span>1 partición</span><span>Mensajes fallidos</span></div></div>
+        <div class="subhead">Grupo de consumidores</div>
+        <div class="group"><span class="pill">Activo</span><strong>pedidos-analitica</strong><span class="push" style="color:var(--muted)">3 tópicos</span></div>
+        <div class="subhead">Flujo de eventos</div>
+        <div class="topicmeta"><span>Pedidos creados → pedidos.creados</span><span>Actualizaciones → pedidos.estado</span></div>
+      </main>
+    </div>
+  </section>
+</div>

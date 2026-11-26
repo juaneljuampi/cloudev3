@@ -1,0 +1,88 @@
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.7.1
+    hostname: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    volumes:
+      - zk_data:/var/lib/zookeeper/data
+      - zk_log:/var/lib/zookeeper/log
+    restart: unless-stopped
+
+  kafka:
+    image: confluentinc/cp-kafka:7.7.1
+    hostname: kafka
+    depends_on: [zookeeper]
+    ports: ["9092:9092"]
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_DEFAULT_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+      KAFKA_NUM_PARTITIONS: 1
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+    restart: unless-stopped
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:v0.7.2
+    depends_on: [kafka]
+    ports: ["8088:8080"]
+    environment:
+      KAFKA_CLUSTERS_0_NAME: pedidos360
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      DYNAMIC_CONFIG_ENABLED: "true"
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    ports: ["5672:5672", "15672:15672"]
+    volumes:
+      - rabbit_data:/var/lib/rabbitmq
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-pedidos360}
+      POSTGRES_USER: ${POSTGRES_USER:-pedidos}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cambiar-local}
+    ports: ["5432:5432"]
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pedidos -d pedidos360"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+
+  api:
+    build: ./backend
+    depends_on:
+      db: {condition: service_healthy}
+      kafka: {condition: service_started}
+      rabbitmq: {condition: service_started}
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-pedidos360}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-pedidos}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-cambiar-local}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      RABBIT_HOST: rabbitmq
+      JWT_SECRET: ${JWT_SECRET:-cambiar-por-clave-segura-de-32-caracteres}
+      JWT_ISSUER: ${JWT_ISSUER:-pedidos360-local}
+      JWT_JWK_SET_URI: ${JWT_JWK_SET_URI:-}
+    ports: ["8080:8080"]
+    restart: on-failure
+
+volumes:
+  zk_data:
+  zk_log:
+  kafka_data:
+  rabbit_data:
+  db_data:

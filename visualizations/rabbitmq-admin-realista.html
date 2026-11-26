@@ -1,0 +1,49 @@
+<div id="rabbitmq-admin-realista">
+  <style>
+    #rabbitmq-admin-realista { color-scheme: light dark; --canvas: light-dark(#f4f6f8,#15191d); --surface: light-dark(#ffffff,#20262c); --surface-alt: light-dark(#f7f9fb,#293139); --text: light-dark(#20262c,#f1f4f6); --subtle: light-dark(#626d78,#aeb8c2); --line: light-dark(#d9dfe5,#3c454e); --blue: light-dark(#176b9b,#67b9e8); --green: light-dark(#237348,#81d6a1); --orange: light-dark(#c56c16,#efad63); color: var(--text); background: var(--canvas); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font: 400 13px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    #rabbitmq-admin-realista * { box-sizing: border-box; }
+    #rabbitmq-admin-realista .browser { display: flex; align-items: center; gap: 12px; height: 42px; padding: 0 14px; background: var(--surface-alt); color: var(--subtle); border-bottom: 1px solid var(--line); }
+    #rabbitmq-admin-realista .traffic { display: flex; gap: 6px; }
+    #rabbitmq-admin-realista .traffic i { display: block; width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+    #rabbitmq-admin-realista .url { flex: 1; padding: 5px 11px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+    #rabbitmq-admin-realista .top { display: flex; align-items: center; gap: 12px; min-height: 54px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--line); }
+    #rabbitmq-admin-realista .rabbit { color: var(--orange); font-size: 17px; font-weight: 500; }
+    #rabbitmq-admin-realista .brand { font-size: 15px; font-weight: 500; }
+    #rabbitmq-admin-realista .vhost { margin-left: auto; padding: 5px 9px; border: 1px solid var(--line); border-radius: 5px; color: var(--subtle); }
+    #rabbitmq-admin-realista .tabs { display: flex; align-items: center; gap: 2px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--line); }
+    #rabbitmq-admin-realista .tab { padding: 12px 13px 10px; color: var(--subtle); border-bottom: 2px solid transparent; white-space: nowrap; }
+    #rabbitmq-admin-realista .tab.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 500; }
+    #rabbitmq-admin-realista .main { padding: 22px 24px 26px; }
+    #rabbitmq-admin-realista .crumb { margin-bottom: 9px; color: var(--blue); }
+    #rabbitmq-admin-realista h2 { margin: 0 0 4px; font-size: 21px; font-weight: 500; }
+    #rabbitmq-admin-realista .description { color: var(--subtle); }
+    #rabbitmq-admin-realista .summary { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px; margin: 18px 0; }
+    #rabbitmq-admin-realista .metric { padding: 12px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+    #rabbitmq-admin-realista .metric span { display: block; color: var(--subtle); }
+    #rabbitmq-admin-realista .metric strong { display: block; margin-top: 4px; font-size: 18px; font-weight: 500; }
+    #rabbitmq-admin-realista .section { margin-top: 17px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); overflow: hidden; }
+    #rabbitmq-admin-realista .section-title { padding: 11px 14px; border-bottom: 1px solid var(--line); font-weight: 500; }
+    #rabbitmq-admin-realista .detail { display: grid; grid-template-columns: 220px minmax(0,1fr); padding: 10px 14px; border-bottom: 1px solid var(--line); }
+    #rabbitmq-admin-realista .detail:last-child { border-bottom: 0; }
+    #rabbitmq-admin-realista .key { color: var(--subtle); }
+    #rabbitmq-admin-realista .pill { display: inline-block; padding: 2px 7px; border-radius: 4px; background: color-mix(in srgb,var(--green) 14%,transparent); color: var(--green); }
+    #rabbitmq-admin-realista .table { width: 100%; border-collapse: collapse; text-align: left; }
+    #rabbitmq-admin-realista th,#rabbitmq-admin-realista td { padding: 10px 13px; border-bottom: 1px solid var(--line); }
+    #rabbitmq-admin-realista th { color: var(--subtle); background: var(--surface-alt); font-weight: 500; }
+    #rabbitmq-admin-realista tr:last-child td { border-bottom: 0; }
+    #rabbitmq-admin-realista .link { color: var(--blue); }
+    #rabbitmq-admin-realista .hint { padding: 10px 14px; color: var(--subtle); border-top: 1px solid var(--line); }
+    @media (max-width: 720px) { #rabbitmq-admin-realista .summary { grid-template-columns: repeat(2,minmax(0,1fr)); } #rabbitmq-admin-realista .main { padding: 16px 12px; } #rabbitmq-admin-realista .tabs { overflow-x: auto; padding: 0 8px; } #rabbitmq-admin-realista .detail { grid-template-columns: 150px minmax(0,1fr); } }
+  </style>
+  <div class="browser"><span class="traffic"><i></i><i></i><i></i></span><span class="url">http://localhost:15672/#/queues/%2F/pedidos.notificaciones</span></div>
+  <header class="top"><span class="rabbit">●</span><span class="brand">RabbitMQ Management</span><span class="vhost">Virtual host: /</span></header>
+  <nav class="tabs" aria-label="RabbitMQ management tabs"><span class="tab">Overview</span><span class="tab">Connections</span><span class="tab">Channels</span><span class="tab">Exchanges</span><span class="tab active">Queues</span><span class="tab">Admin</span></nav>
+  <main class="main">
+    <div class="crumb">Queues　›　/　›　pedidos.notificaciones</div>
+    <h2>Queue: pedidos.notificaciones</h2>
+    <div class="description">Classic queue · Durable · State: <span class="pill">running</span></div>
+    <div class="summary"><div class="metric"><span>Ready</span><strong>0</strong></div><div class="metric"><span>Unacked</span><strong>0</strong></div><div class="metric"><span>Total</span><strong>0</strong></div><div class="metric"><span>Consumers</span><strong>1</strong></div></div>
+    <section class="section"><div class="section-title">Bindings</div><table class="table"><thead><tr><th>From exchange</th><th>Routing key</th><th>Arguments</th></tr></thead><tbody><tr><td class="link">pedidos.exchange</td><td>pedido.creado</td><td>—</td></tr></tbody></table><div class="hint">Los pedidos nuevos llegan desde el exchange de pedidos.</div></section>
+    <section class="section"><div class="section-title">Arguments</div><div class="detail"><span class="key">x-dead-letter-exchange</span><span>pedidos.dlx</span></div><div class="detail"><span class="key">x-dead-letter-routing-key</span><span>pedidos.fallidos</span></div><div class="detail"><span class="key">DLQ de destino</span><span class="link">pedidos.notificaciones.dlq</span></div></section>
+  </main>
+</div>
